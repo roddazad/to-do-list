@@ -1,37 +1,64 @@
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
-    background-color: #e3f2fd;
+    background: linear-gradient(135deg, #2196F3, #E91E63);
+    color: white;
     padding: 20px;
+    margin: 0;
 }
 
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 350px;
+.hero-section {
     text-align: center;
+    margin-bottom: 30px;
 }
+
+.hero-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.cta-button {
+    background: white;
+    color: #2196F3;
+    padding: 12px 20px;
+    font-size: 1em;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background: #f4f4f4;
+}
+
+
+
+.container {
+    max-width: 50vw; 
+    width: 90%;
+    margin: 0 auto;
+}
+
 
 h1 {
     color: #1565c0;
-    margin-bottom: 10px;
-}
-
-p {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #555;
 }
 
 button {
     padding: 12px 20px;
     background: #1565c0;
-    /* padding: 20px; */
     color: white;
     border: none;
     cursor: pointer;
@@ -61,18 +88,47 @@ ul {
     list-style: none;
     padding: 0;
     margin-top: 20px;
+    width: 100%;
 }
 
+
 li {
-    background: #f9f9f9;
-    gap: 10px;
-    margin: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between checkbox, text, and button */
+    margin: 8px 0;
     padding: 12px;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: #f9f9f9;
     transition: all 0.3s ease;
+    color: black;
+}
+
+li input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+
+li span {
+    flex: 1;
+}
+
+
+li button {
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: none;
+    background: #6c84cc;
+    color: white;
+    cursor: pointer;
+}
+
+li button.delete {
+    margin-left: auto;
 }
 
 li:hover {
@@ -86,48 +142,48 @@ li:hover {
 
 .task-buttons {
     display: flex;
-    gap: 5px;
+    align-items: center;
 }
 
-.task-buttons button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.task-buttons .complete {
-    color: #2e7d32;
-}
-
-.task-buttons .delete {
-    color: #d32f2f;
-}
-
+/* Dark Mode Styles */
 .dark-mode {
-    background-color: #212121;
+    background: #121212;
     color: white;
-}
-.dark-mode p {
-    color: white;
-}
-.dark-mode h1 {
-    color: rgb(172, 212, 239);
 }
 
 .dark-mode .container {
-    background-color: #424242;
-}
-
-.dark-mode button {
-    background: #1e88e5;
-}
-
-.dark-mode li {
-    background: #616161;
+    background: #1e1e1e;
     color: white;
 }
 
+.dark-mode input, .dark-mode button, .dark-mode ul {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+.dark-mode li {
+    background: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
 .dark-mode li:hover {
-    background: #757575;
+    background: #444;
+}
+
+.dark-mode h1, .dark-mode p {
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
     });
 
-    if (JSON.parse(localStorage.getItem("darkMode"))) {
+    if (localStorage.getItem("darkMode") === "true") {
         document.body.classList.add("dark-mode");
     }
 
