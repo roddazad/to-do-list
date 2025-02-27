@@ -1,51 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Getting HTML Elements
     const taskInput = document.getElementById("taskInput");
     const addTaskBtn = document.getElementById("addTaskBtn");
     const taskList = document.getElementById("taskList");
+    const toggleDarkMode = document.getElementById("toggleDarkMode");
 
-    // Loading Tasks from Local Storage
     function loadTasks() {
         const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
         taskList.innerHTML = "";
-        tasks.forEach(task => addTaskToDOM(task));
+        tasks.forEach(task => addTaskToDOM(task.text, task.completed));
     }
 
-    // Adding a Task to the Page
-    function addTaskToDOM(task) {
+    function addTaskToDOM(taskText, completed = false) {
         const li = document.createElement("li");
-        li.textContent = task;
-
-        const rmvBtn = document.createElement("button");
-        rmvBtn.textContent = "X";
-
-        rmvBtn.addEventListener("click", () => removeTask(task));
-
-        li.appendChild(rmvBtn);
+        
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = completed;
+        checkbox.addEventListener("change", () => toggleTaskCompletion(taskText));
+        
+        const span = document.createElement("span");
+        span.textContent = taskText;
+        if (completed) {
+            span.classList.add("completed");
+        }
+        
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "❌";
+        deleteBtn.classList.add("delete");
+        deleteBtn.addEventListener("click", () => removeTask(taskText));
+        
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
         taskList.appendChild(li);
     }
 
-    // Add tasks to Local Storage
     function addTask() {
         const task = taskInput.value.trim();
         if (task) {
             let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            tasks.push(task);
+            tasks.push({ text: task, completed: false });
             localStorage.setItem("tasks", JSON.stringify(tasks));
             addTaskToDOM(task);
             taskInput.value = "";
         }
     }
 
-    // Removing Task
-    function removeTask(task) {
+    function toggleTaskCompletion(taskText) {
         let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        tasks = tasks.filter(t => t !== task);
+        tasks = tasks.map(task => task.text === taskText ? { ...task, completed: !task.completed } : task);
         localStorage.setItem("tasks", JSON.stringify(tasks));
         loadTasks();
     }
 
-    // Connecting Everything
+    function removeTask(taskText) {
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks = tasks.filter(task => task.text !== taskText);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        loadTasks();
+    }
+
+    toggleDarkMode.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    });
+
+    if (JSON.parse(localStorage.getItem("darkMode"))) {
+        document.body.classList.add("dark-mode");
+    }
+
     addTaskBtn.addEventListener("click", addTask);
     loadTasks();
 });
