@@ -107,6 +107,12 @@ li:hover {
     background-color: #212121;
     color: white;
 }
+.dark-mode p {
+    color: white;
+}
+.dark-mode h1 {
+    color: rgb(172, 212, 239);
+}
 
 .dark-mode .container {
     background-color: #424242;
