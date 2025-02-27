@@ -31,6 +31,7 @@ p {
 button {
     padding: 12px 20px;
     background: #1565c0;
+    /* padding: 20px; */
     color: white;
     border: none;
     cursor: pointer;
